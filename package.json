@@ -1,0 +1,20 @@
+{
+  "name": "ide",
+  "version": "0.0.1",
+  "description": "A minimal IDE",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/raffleberry/",
+  "keywords": [
+    "electron",
+    "Debadutta Padhial",
+    "IDE"
+  ],
+  "author": "raffleberry",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^4.0.3"
+  }
+}
