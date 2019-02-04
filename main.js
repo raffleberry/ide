@@ -1,9 +1,21 @@
 const { app, BrowserWindow, Menu } = require('electron')
 const shell = require('electron').shell
+const ipc = require('electron').ipcMain
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+
+function createSettingsWindow() {
+  
+  let settings = new BrowserWindow({ width: 640, height: 200})
+  //comment this on release
+  //settings.webContents.openDevTools()
+  settings.on('close', () => {
+    settings = null
+  })
+  settings.loadFile('src/settings.html')
+}
 
 function createWindow () {
   // Create the browser window.
@@ -12,7 +24,8 @@ function createWindow () {
   // and load the index.html of the app.
   win.loadFile('src/index.html')
 
-  win.webContents.openDevTools()
+  //comment this on release
+  //win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -26,7 +39,12 @@ function createWindow () {
     {
       label: 'Menu',
       submenu: [
-        { label: 'Settings' },
+        {
+          label: 'Settings',
+          click() {
+            createSettingsWindow()
+          }
+        },
         {
           label: 'Help',
           click() {
@@ -49,9 +67,6 @@ function createWindow () {
   Menu.setApplicationMenu(menu)
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 
 // Quit when all windows are closed.
@@ -73,3 +88,7 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+ipc.on('themeChange', function(event, arg) {
+  win.webContents.send('theme', arg)
+})

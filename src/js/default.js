@@ -1,5 +1,5 @@
 var editor = ace.edit("editor");
-editor.setTheme("ace/theme/xcode");
+editor.setTheme("ace/theme/dawn");
 editor.session.setMode("ace/mode/javascript");
 editor.session.setTabSize(2);
 editor.session.setUseSoftTabs(true);
