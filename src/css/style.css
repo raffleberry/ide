@@ -1,23 +1,43 @@
-body {
-  overflow: hidden;
-  font: caption;
-}
-#editor {
-  margin: 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+html, body {
+  height: 100%;
 }
 
-/*
-#editor {
-    margin: 0;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.full-screen {
+  height: 100%;
 }
-*/
+.height-fifty {
+  height: 40%;
+}
+
+.disable-resize {
+  resize: none;
+}
+
+.trim-sides {
+  margin: 0 0 0 0;
+  border: none;
+}
+
+.margin-top-ten {
+  margin-top: 10%;
+}
+
+.margin-right-2 {
+  margin-right: 10%;
+}
+
+.margin-left-2 {
+  margin-left: 10%;
+}
+
+.margin-bottom-ten {
+  margin-bottom: 10%;
+}
+
+#editor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

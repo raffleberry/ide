@@ -37,7 +37,7 @@ function createWindow () {
 
   var menu = Menu.buildFromTemplate([
     {
-      label: 'Menu',
+      label: 'File',
       submenu: [
         {
           label: 'Settings',
@@ -64,7 +64,7 @@ function createWindow () {
       ]
     }
   ])
-  Menu.setApplicationMenu(menu)
+  win.setMenu(menu)
 }
 
 app.on('ready', createWindow)
