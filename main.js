@@ -1,31 +1,35 @@
 const { app, BrowserWindow, Menu } = require('electron')
 const shell = require('electron').shell
 const ipc = require('electron').ipcMain
+const settings = require('electron-settings')
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let win
+let win, settingsWin
 
 function createSettingsWindow() {
   
-  let settings = new BrowserWindow({ width: 640, height: 200})
-  //comment this on release
-  //settings.webContents.openDevTools()
-  settings.on('close', () => {
-    settings = null
+  settingsWin = new BrowserWindow({
+    width: 640, height: 400,
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
-  settings.loadFile('src/settings.html')
+  settingsWin.on('close', () => {
+    settingsWin = null
+  })
+  settingsWin.loadFile('src/settings.html')
 }
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 })
+  win = new BrowserWindow({
+    width: 800, height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
 
   // and load the index.html of the app.
   win.loadFile('src/index.html')
-
-  //comment this on release
-  //win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -43,7 +47,8 @@ function createWindow () {
           label: 'Settings',
           click() {
             createSettingsWindow()
-          }
+          },
+          accelerator : 'CmdorCtrl+Shift+S'
         },
         {
           label: 'Help',
@@ -61,6 +66,20 @@ function createWindow () {
             app.quit()
           }
         }
+      ]
+    },
+    {
+      label: 'Developer Tools',
+      submenu: [
+        { role: 'reload' },
+        { role: 'forcereload' },
+        { role: 'toggledevtools' },
+        { type: 'separator' },
+        { role: 'resetzoom' },
+        { role: 'zoomin' },
+        { role: 'zoomout' },
+        { type: 'separator' },
+        { role: 'togglefullscreen' }
       ]
     }
   ])
@@ -88,7 +107,3 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
-ipc.on('themeChange', function(event, arg) {
-  win.webContents.send('theme', arg)
-})
