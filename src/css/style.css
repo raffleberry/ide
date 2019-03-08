@@ -1,9 +1,11 @@
 html, body {
   height: 100%;
+  width: 100%;
 }
 
 .full-screen {
   height: 100%;
+  width: 100%;
 }
 .height-fifty {
   height: 40%;
@@ -11,6 +13,7 @@ html, body {
 
 .disable-resize {
   resize: none;
+  width: 100%;
 }
 
 .trim-sides {
@@ -18,19 +21,39 @@ html, body {
   border: none;
 }
 
-.margin-top-ten {
-  margin-top: 10%;
+.margin-left-2 {
+  margin-left: 2%;
 }
 
 .margin-right-2 {
+  margin-right: 2%;
+}
+
+.margin-top-2 {
+  margin-top: 2%;
+}
+
+.margin-bottom-2 {
+  margin-bottom: 2%;
+}
+
+.margin-bottom-5 {
+  margin-bottom: 5%;
+}
+
+.margin-top-10 {
+  margin-top: 10%;
+}
+
+.margin-right-10 {
   margin-right: 10%;
 }
 
-.margin-left-2 {
+.margin-left-10 {
   margin-left: 10%;
 }
 
-.margin-bottom-ten {
+.margin-bottom-10 {
   margin-bottom: 10%;
 }
 

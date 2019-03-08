@@ -4,11 +4,37 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Settings</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    Themes
-    <select id="themeSelector"></select>
+    <div class="container">
+      <div class="row">
+        <div class="col col-5">
+          <div class="row">
+            <label for="themeSelector">Themes</label>
+            <select class="form-control margin-bottom-5" id="themeSelector"></select>
+          </div>
+          <div class="row">
+            <label for="fontSelector">Font Size</label>
+            <input class="form-control margin-bottom-5" type="text" name="fontSelector" id="fontSelector" maxlength="2">
+          </div>
+          <div class="row">
+            <label for="modeSelector">Mode</label>
+            <select class="form-control margin-bottom-5" id="modeSelector"></select>
+          </div>
+        </div>
+        <div class="col col-2"></div>
+        <div class="col col-5">
+          <div class="row">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>window.$ = window.jQuery = require('./js/jquery-3.2.1.slim.min.js')</script>
+    <script src="js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/settings.js"></script>
   </body>
 </html>
