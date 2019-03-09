@@ -3,6 +3,9 @@ html, body {
   width: 100%;
 }
 
+body {
+  user-select: none;
+}
 .full-screen {
   height: 100%;
   width: 100%;
