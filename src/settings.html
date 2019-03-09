@@ -9,9 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div class="container">
+    <div class="container" style="padding-top: 4%; padding-bottom: 4%">
       <div class="row">
         <div class="col col-5">
+          <div class="row">
+            <label for="tabSizeSelector">Tab Size</label>
+            <input class="form-control margin-bottom-2" type="text" name="tabSizeSelector" id="tabSizeSelector" maxlength="1">
+          </div>
           <div class="row">
             <label for="themeSelector">Themes</label>
             <select class="form-control margin-bottom-5" id="themeSelector"></select>
@@ -21,13 +25,23 @@
             <input class="form-control margin-bottom-5" type="text" name="fontSelector" id="fontSelector" maxlength="2">
           </div>
           <div class="row">
-            <label for="modeSelector">Mode</label>
+            <label for="modeSelector">Syntax highlight mode</label>
             <select class="form-control margin-bottom-5" id="modeSelector"></select>
           </div>
         </div>
         <div class="col col-2"></div>
         <div class="col col-5">
           <div class="row">
+            <div class="form-check">
+              <input class="form-check-input justify-content-center" type="checkbox" id="softTabs">
+              <label class="form-check-label" for="softTabs">Use spaces instead of tabs</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="highlightLine">
+              <label class="form-check-label" for="highlightLine">Highlight active line</label>
+            </div>
           </div>
         </div>
       </div>
