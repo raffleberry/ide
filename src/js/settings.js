@@ -200,11 +200,14 @@ var modes = [
 
 const electron = require('electron')
 const ipc = electron.ipcRenderer
-const settings = require('electron-settings')
+const settings = require('electron').remote.require('electron-settings');
 
 var themeSelector = document.getElementById('themeSelector')
 var fontSelector = document.getElementById('fontSelector')
 var modeSelector = document.getElementById('modeSelector')
+var tabSizeSelector = document.getElementById('tabSizeSelector')
+var softTabsCheckbox = document.getElementById('softTabs')
+var highlightLineCheckbox = document.getElementById('highlightLine')
 
 /* variables */
 var options = null
@@ -246,17 +249,33 @@ option = null
 
 /* adding modes to the theme list : END */
 
-fontSelector.value = settings.get('editor.fontSize')
+fontSelector.value = String(settings.get('editor.fontSize')).split('px')[0]
 themeSelector.value = settings.get('editor.theme')
 modeSelector.value = settings.get('editor.mode')
-
+tabSizeSelector.value = settings.get('editor.tabSize')
+softTabsCheckbox.checked = settings.get('editor.softTabs')
+highlightLineCheckbox.checked = settings.get('editor.highlightActiveLine')
 
 themeSelector.addEventListener('change', function() {
   settings.set('editor.theme', String(themeSelector.value))
 })
 
 fontSelector.addEventListener('change', function() {
-  settings.set('editor.fontSize', String(fontSelector.value))
+  console.log(String(fontSelector.value) + 'px')
+  settings.set('editor.fontSize', String(fontSelector.value) + 'px')
+})
+
+tabSizeSelector.addEventListener('change', function() {
+  settings.set('editor.tabSize', Number(tabSizeSelector.value))
+})
+
+softTabsCheckbox.addEventListener('change', function() {
+  settings.set('editor.softTabs', softTabsCheckbox.checked)
+})
+
+
+highlightLineCheckbox.addEventListener('change', function () {
+  settings.set('editor.highlightActiveLine', highlightLineCheckbox.checked)
 })
 
 modeSelector.addEventListener('change', function() {
