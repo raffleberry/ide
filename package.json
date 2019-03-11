@@ -15,7 +15,8 @@
   "author": "raffleberry",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^4.0.3"
+    "electron": "^4.0.8",
+    "electron-packager": "^13.1.1"
   },
   "dependencies": {
     "axios": "^0.18.0",

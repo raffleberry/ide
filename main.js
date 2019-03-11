@@ -2,16 +2,18 @@ const { app, BrowserWindow, Menu } = require('electron')
 const shell = require('electron').shell
 const ipc = require('electron').ipcMain
 const settings = require('electron-settings')
+const axios = require('axios')
+const path = require('path')
 
 let win, settingsWin
 
 function createSettingsWindow() {
-  
   settingsWin = new BrowserWindow({
     width: 640, height: 400,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    resizable: false
   })
   settingsWin.on('close', () => {
     settingsWin = null
@@ -20,22 +22,19 @@ function createSettingsWindow() {
 }
 
 function createWindow () {
-  // Create the browser window.
+  settings.setPath(String(path.dirname(require.main.filename)) + '/Settings.json')
   win = new BrowserWindow({
     width: 800, height: 600,
+    minHeight: 600, minWidth: 800,
     webPreferences: {
       nodeIntegration: true
     }
   })
 
-  // and load the index.html of the app.
   win.loadFile('src/index.html')
 
-  // Emitted when the window is closed.
   win.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
+    app.quit()
     win = null
   })
 
@@ -67,7 +66,7 @@ function createWindow () {
           }
         }
       ]
-    },
+    }
     {
       label: 'Developer Tools',
       submenu: [
@@ -105,5 +104,28 @@ app.on('activate', () => {
   }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+ipc.on('execute', function(event, arg) {
+  execute(arg)
+})
+
+var argList = {
+  "7": "-std=c++14 -O2 -o a.out source_file.cpp",
+  "27": "-std=c++14 -stdlib=libc++ -O2 -o a.out source_file.cpp",
+}
+
+function execute(arg) {
+  console.log(arg);
+  axios.post('https://rextester.com/rundotnet/api', {
+    "LanguageChoice": arg[2],
+    "Program": arg[0],
+    "Input": arg[1],
+    "CompilerArgs": argList[arg[2]]
+  }).then(function(res) {
+    var data = res.data
+    if (data.Errors == null) {
+      win.webContents.send('output', [data.Result, 0])
+    } else {
+      win.webContents.send('output', [data.Errors, 1])
+    }
+  })
+}
