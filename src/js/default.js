@@ -5,7 +5,7 @@ const settings = require('electron').remote.require('electron-settings');
 settings.set('editor', {
     theme: "ace/theme/xcode",
     mode: "ace/mode/c_cpp",
-    modeVal: "",
+    modeVal: "5",
     tabSize: 2,
     softTabs: true,
     highlightActiveLine: true,

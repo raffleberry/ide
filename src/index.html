@@ -20,9 +20,14 @@
         <div class="row height-fifty margin-right-10 margin-left-10">
           <textarea class="form-control disable-resize" id="prog-output" readonly></textarea>
         </div>
-        <div class="row margin-bottom-2" style="justify-content: center">stdout</div>
+        <div class="row margin-bottom-2" style="justify-content: center"><span id="response">stdout</span></div>
         <div class="row">
-            <button class="btn-primary" style="margin: 0 auto">compile and run</button>
+            <!--
+            <div id="popup">
+              <span>Couldn't connect to compiler service</span>
+            </div>
+            -->
+            <button class="btn btn-primary" id="execute" style="margin: 0 auto">compile and run</button>
         </div>
       </div>
     </div>

@@ -1,8 +1,13 @@
-const electron = require('electron')
+const ipc = require('electron').ipcRenderer
 
 var editor = ace.edit("editor")
 
-fontStyle = document.getElementById('editor').style
+var execute = document.getElementById("execute")
+
+var fontStyle = document.getElementById('editor').style
+var output = document.getElementById('prog-output')
+var input = document.getElementById('prog-input')
+var response = document.getElementById('response')
 
 //setting theme
 settings.watch('editor.theme', function(newValue, oldValue) {
@@ -31,6 +36,25 @@ settings.watch('editor.highlightActiveLine', function(newValue, oldValue) {
 })
 
 //setting language mode change
-settings.watch('editor.mode', function(newValue, oldValue) {
+settings.watch('editor.aceMode', function(newValue, oldValue) {
   editor.session.setMode(newValue)
+
+})
+
+ipc.on('output', function(event, arg) {
+  if (arg[1] == 1) {
+    response.textContent = "stderr";
+  } else {
+    response.textContent = "stdout";
+  }
+  output.value = arg[0]
+  execute.disabled = false
+})
+
+execute.addEventListener('click', function() {
+  output.value = "";
+  var code = editor.getSession().getValue()
+  execute.disabled = true
+  arg = [code, input.value, settings.get('editor.modeVal')]
+  ipc.send('execute', arg)
 })

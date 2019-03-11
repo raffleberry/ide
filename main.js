@@ -66,7 +66,7 @@ function createWindow () {
           }
         }
       ]
-    }
+    },
     {
       label: 'Developer Tools',
       submenu: [
