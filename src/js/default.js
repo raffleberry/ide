@@ -5,6 +5,7 @@ const settings = require('electron').remote.require('electron-settings');
 settings.set('editor', {
     theme: "ace/theme/xcode",
     mode: "ace/mode/c_cpp",
+    modeVal: "",
     tabSize: 2,
     softTabs: true,
     highlightActiveLine: true,
@@ -21,7 +22,7 @@ lots of shit WILL GO WRONG
 
 //editor-setup on startup
 editor.setTheme(settings.get('editor.theme'));
-editor.session.setMode(settings.get('editor.mode'));
+editor.session.setMode(settings.get('editor.aceMode'));
 editor.setAutoScrollEditorIntoView(true);
 editor.session.setTabSize(settings.get('editor.tabSize'));
 editor.session.setUseSoftTabs(settings.get('editor.softTabs'));
